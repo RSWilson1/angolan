@@ -29,17 +29,13 @@ class DatabaseTests(unittest.TestCase):
 
 class Test_ACT_return(unittest.TestCase):
     """Class for testing returned value from db."""
-    def (self):
-        """Run prior to each test."""
-        self.db_mod = Database()
+    def test_is_ACT_pos(self):
+        """Check ACT is positive."""
+        self.assertGreater(self.db_mod.get_avg_ACT_cost(), 0, "Check that the average in not negative.")
 
-    def tearDown(self):
-        """Run post each test."""
-        pass
-
-    def test_get_total_number_items(self):
+    def test_get_avg_ACT_cost(self):
         """Test that the total number of items returns the correct value."""
-        self.assertEquals(self.db_mod.get_total_number_items(), 8218165, 'Test total items returns correct value')
+        self.assertEquals(self.db_mod.get_avg_ACT_cost(), 73, 'Test total items returns correct value')
 
 
 

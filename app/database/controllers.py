@@ -60,3 +60,9 @@ class Database:
                                 func.max(PrescribingData.quantity))[0][1])
         percentage = (max_quantity / abs_total) * 100
         return str(round(percentage, 2))
+
+    def get_unique(self):
+        """Return the number of unique prescriptions"""
+        # return db.session.query(PrescribingData.BNF_code).distinct().all()
+        return int(db.session.query(func.count(PrescribingData.BNF_code.distinct()).label('sum_qty')).first()[0])
+        # return db.session.query(func.count(distinct(PrescribingData.BNF_code)).label("sum distinct").first()[0])
