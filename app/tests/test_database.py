@@ -26,5 +26,27 @@ class DatabaseTests(unittest.TestCase):
         """Test that the total number of items returns the correct value."""
         self.assertEquals(self.db_mod.get_total_number_items(), 8218165, 'Test total items returns correct value')
 
+
+class Test_ACT_return(unittest.TestCase):
+    """Class for testing returned value from db."""
+    def (self):
+        """Run prior to each test."""
+        self.db_mod = Database()
+
+    def tearDown(self):
+        """Run post each test."""
+        pass
+
+    def test_get_total_number_items(self):
+        """Test that the total number of items returns the correct value."""
+        self.assertEquals(self.db_mod.get_total_number_items(), 8218165, 'Test total items returns correct value')
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     unittest.main()

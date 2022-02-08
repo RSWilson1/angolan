@@ -7,7 +7,9 @@ INSTITUTION:   University of Manchester (FBMH)
 DESCRIPTION:   Contains the Database class that contains all the methods used for accessing the database
 """
 
+from numpy import average
 from sqlalchemy.sql import func
+from sqlalchemy.sql import desc
 from flask import Blueprint
 
 from app import db
@@ -21,17 +23,28 @@ class Database:
         """Return the total number of prescribed items."""
         return int(db.session.query(func.sum(PrescribingData.items).label('total_items')).first()[0])
 
+
     def get_prescribed_items_per_pct(self):
         """Return the total items per PCT."""
         return db.session.query(func.sum(PrescribingData.items).label('item_sum')).group_by(PrescribingData.PCT).all()
+
 
     def get_distinct_pcts(self):
         """Return the distinct PCT codes."""
         return db.session.query(PrescribingData.PCT).distinct().all()
 
+
     def get_n_data_for_PCT(self, pct, n):
         """Return all the data for a given PCT."""
         return db.session.query(PrescribingData).filter(PrescribingData.PCT == pct).limit(n).all()
+
+    def get_avg_ACT_cost(self):
+        """
+        Return the Average ACT cost for all drugs over all practices.
+        The average cost of a Prescription drug for the NHS.
+        """
+        return int(db.session.query(func.avg(PrescribingData.ACT_cost).label('Average ACT Cost')).first()[0])
+        #db.session.query(PrescribingData.ACT_cost.avg().label('Average ACT Cost'))
 
     def get_max_description(self):
         """Return the description with the max quantity prescription which is the BNF name"""
