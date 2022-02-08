@@ -51,7 +51,7 @@ class Database:
         return db.session.query(PrescribingData.BNF_name,
                                 func.max(PrescribingData.quantity))[0][0]
 
-    def get_max_quantity(self):
+    def get_max_percent_quantity(self):
         """Return the percentage the most prescribed prescription represents. Calculate the absolut total of all
         prescriptions. Round the percentage to 2 decimal places."""
 
