@@ -164,7 +164,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Average ACT cost:</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">£ {{ tile_data[2] }}</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">£ {{ tile_data[1] }}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-pound-sign fa-2x text-gray-300"></i>
@@ -184,14 +184,13 @@
                       <span class="text_col_black"></span>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">{{ tile_data[2] }}</div>
                           <div class="h5 mb-0 font-weight-bold text-gray-800">{{ tile_data[1] }}</div>
-                          <br>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">{{ tile_data[3] }}%</div>
-                          <br>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">%</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ tile_data[3] }}%"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ tile_data[2] }}%" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </div>
@@ -332,7 +331,14 @@
                   <h6 class="m-0 font-weight-bold text-primary">About the prescribing dashboard</h6>
                 </div>
                 <div class="card-body">
-                  <p>?</p>
+                  <p>
+                    <b> Prescribing dashboards </b> </br />
+                    <br /> OpenPrescribing is a collection of data, published monthly by various NHS authorities, which has been aggregated together to provide an interface to the raw English prescribing data in primary care. OpenPrescribing combines practice size and location, CCG to practice relations and BNF codes for the raw prescribing data in order to make a comprehensive dataset which is easily interrogated to support research.
+                    <br /> <br /> We have downloaded a subset of the data accessible via OpenPrescribing and made some helpful dashboards to visualise prescribing data. Currently we have dashboards to display the total items prescribed and unique items, the average cost per prescribed item and the most prescribed item. These can be expanded in the future to include other useful metrics such as tracking the prescribing of certain medicines or analyse the prescribing patterns of certain practices.
+                    <br /> <br/> <b> The team </b> </br />
+                    <br /> We are a group of trainee Bioinformaticians, part of the National Scientific Training Porgramme (STP), working across England. If you have queries, feedback or any general comments, please get in touch with us at: <a href="https://outlook.live.com/owa/"> example-email@outlook.com. </a>
+                    <br/> <br/> The code for this website is open-source, licensed under the MIT License and can be accessed via our repository on GitHub: <a href="https://github.com/RSWilson1/angolan"> https://github.com/RSWilson1/angolan. </a>
+                  </p>
                   <br />
                   <hr />
                    <button type="button" class="btn btn-danger" onclick="popup.hideAboutPopup();">Close</button>
