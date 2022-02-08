@@ -53,10 +53,16 @@ class Database:
         This aims to get the sum of the quanity over all practices, they are then ordered
         and the drug with the highest quantity is returned. This would be the most presribed in the UK.
         """
-        # db.session.query(func.max(PrescribingData.quantity).label('Max Quantity'))
-        # .group_by(PrescribingData.PCT).all()
-        #return db.session.query(func.sum(PrescribingData.quantity).group_by(PrescribingData.BNF_code).order_by(func.sum(PrescribingData.quantity)).desc().first())
         return db.session.query(PrescribingData.BNF_name, \
                 PrescribingData.BNF_code, func.sum(PrescribingData.quantity))\
                 .group_by(PrescribingData.BNF_code).order_by(func.sum(PrescribingData.quantity)\
                 .desc()).limit(1).all()[0][0]
+
+    def get_percentage(self):
+        total = db.session.query(func.sum(PrescribingData.quantity)).first()[0]
+        max_quant = db.session.query(PrescribingData.BNF_name, \
+                PrescribingData.BNF_code, func.sum(PrescribingData.quantity))\
+                .group_by(PrescribingData.BNF_code).order_by(func.sum(PrescribingData.quantity)\
+                .desc()).limit(1).all()[0][2]
+        return round((max_quant/total)*100)
+

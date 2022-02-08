@@ -184,12 +184,14 @@
                       <span class="text_col_black"></span>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">%</div>
                           <div class="h5 mb-0 font-weight-bold text-gray-800">{{ tile_data[1] }}</div>
+                          <br>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">{{ tile_data[3] }}%</div>
+                          <br>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow=int(tile_data[3]) style="width: 25%" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </div>
