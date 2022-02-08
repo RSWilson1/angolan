@@ -32,3 +32,18 @@ class Database:
     def get_n_data_for_PCT(self, pct, n):
         """Return all the data for a given PCT."""
         return db.session.query(PrescribingData).filter(PrescribingData.PCT == pct).limit(n).all()
+
+    def get_max_description(self):
+        """Return the description with the max quantity prescription which is the BNF name"""
+        return db.session.query(PrescribingData.BNF_name,
+                                func.max(PrescribingData.quantity))[0][0]
+
+    def get_max_quantity(self):
+        """Return the percentage the most prescribed prescription represents. Calculate the absolut total of all
+        prescriptions. Round the percentage to 2 decimal places."""
+
+        abs_total = int(db.session.query(func.sum(PrescribingData.quantity)).first()[0])
+        max_quantity = int(db.session.query(PrescribingData.BNF_name,
+                                func.max(PrescribingData.quantity))[0][1])
+        percentage = (max_quantity / abs_total) * 100
+        return str(round(percentage, 2))
