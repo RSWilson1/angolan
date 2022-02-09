@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/RSWilson1/angolan">
-    <img src="images/logo.jpg" alt="University of Manchester logo" width="80" height="80">
+    <img src="images/logo.jpg" alt="University of Manchester logo" width="300" height="120">
   </a>
 
 <h3 align="center">Team Angolan, Project Dashboard </h3>
