@@ -205,7 +205,7 @@ Project Link: [https://github.com/RSWilson1/angolan](https://github.com/RSWilson
   * Rachael Ayegba
   * Giovanni 
   * Sonal Mendonca
-  * Leva
+  * Ieva
 * Alan Davies
 
 
