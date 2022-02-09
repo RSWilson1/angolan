@@ -202,8 +202,8 @@ Project Link: [https://github.com/RSWilson1/angolan](https://github.com/RSWilson
 
 * Angolan Team
   * Rob Wilson
-  * Rachael Aye
-  * Giovanni 
+  * Rachael Ayegba
+  * Giovanni
   * Sonal
   * Leva
 * Alan Davies
