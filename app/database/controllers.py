@@ -43,8 +43,7 @@ class Database:
         Return the Average ACT cost for all drugs over all practices.
         The average cost of a Prescription drug for the NHS.
         """
-        return int(db.session.query(func.avg(PrescribingData.ACT_cost).label('Average ACT Cost')).first()[0])
-        #db.session.query(PrescribingData.ACT_cost.avg().label('Average ACT Cost'))
+        return round(db.session.query(func.avg(PrescribingData.ACT_cost).label('Average ACT Cost')).first()[0], 2)
 
     def get_max_description(self):
         """Return the description with the max quantity prescription which is the BNF name"""
