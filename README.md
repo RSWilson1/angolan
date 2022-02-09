@@ -145,7 +145,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- ROADMAP -->
 ## Roadmap
-
+- [x] Unique items in dataset
+- [x] Highest quantity item in dataset and % with progress bar
+- [x] Average actual drug cost to the NHS
+- [x] About section
 - [ ] Calculator for creatine metabolism
 - [ ] Infection treatment drug as % of all infection treatments
 
@@ -196,7 +199,14 @@ Project Link: [https://github.com/RSWilson1/angolan](https://github.com/RSWilson
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [Alan Davies]()
+
+* Angolan Team
+  * Rob Wilson
+  * Rachael Aye
+  * Giovanni 
+  * Sonal
+  * Leva
+* Alan Davies
 
 
 
