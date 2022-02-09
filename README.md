@@ -203,10 +203,10 @@ Project Link: [https://github.com/RSWilson1/angolan](https://github.com/RSWilson
 * Angolan Team
   * Rob Wilson
   * Rachael Ayegba
-  * Giovanni
-  * Sonal
-  * Leva
-* Alan Davies
+  * Giovanni Stefani
+  * Sonal Mendonca
+  * Leva Lipska
+* Alan Davies for his input and teaching.
 
 
 
