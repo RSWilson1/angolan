@@ -39,10 +39,5 @@ class Test_ACT_return(unittest.TestCase):
 
 
 
-
-
-
-
-
 if __name__ == "__main__":
     unittest.main()
