@@ -66,67 +66,43 @@ class Database:
             PrescribingData.BNF_code.distinct()).label('sum_qty')).scalar())
 
     def get_total_infection_drugs(self):
-        #all_inf_bnfs = db.session.query(PrescribingData).filter(PrescribingData.BNF_code.startswith("05%")).all()
-        #total = len(all_inf_bnfs)
-        subquery = db.session.query(PrescribingData).filter(
-            PrescribingData.BNF_code.startswith("05%")).subquery()
-        #total = db.session.query(func.sum(subquery.items)).first()[0]
-        #query = db.session.query(func.sum(PrescribingData.items)).filter(PrescribingData.BNF_code.in_(subquery)).scalar()
-        total = db.session.query(func.sum(PrescribingData.items)).filter(PrescribingData.BNF_code.startswith("05%")).scalar()
-        return query
+        total = db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.BNF_code.startswith("05%")).scalar()
+        return total
 
     def get_antiB_per(self):
         total = self.get_total_infection_drugs()
-        #antibio_bnfs = db.session.query(func.sum(PrescribingData.quantity)).filter(PrescribingData.BNF_code.startswith("0501%")).all()
-        #antibio_bnfs_per = (antibio_bnfs/total)*100
-        #subquery = db.session.query(PrescribingData).filter(
-        #    PrescribingData.BNF_code.startswith("0501%")).subquery()
-        #query = db.session.query(func.sum(subquery.c.items)).scalar()
-        #antibio_bnfs_per = (query/total)*100
-        return total
+        query_antibio = db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.BNF_code.startswith("0501%")).scalar()
+        antibio_bnfs_per = (query_antibio/total)*100
+        return round(antibio_bnfs_per, 2)
 
     def get_antifungal_per(self):
         total = self.get_total_infection_drugs()
-        #antifungal_bnfs = len(db.session.query(PrescribingData).filter(PrescribingData.BNF_code.startswith("0502%")).all())
-        #antifungal_bnfs_per = (antifungal_bnfs/total)*100
-        #return round(antifungal_bnfs_per, 2)
-        subquery = db.session.query(PrescribingData).filter(
-            PrescribingData.BNF_code.startswith("0502%")).subquery()
-        query = db.session.query(func.sum(subquery.c.quantity)).scalar()
-        antifungal_bnfs_per = (query/total)*100
+        query_antifungal = db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.BNF_code.startswith("0502%")).scalar()
+        antifungal_bnfs_per = (query_antifungal/total)*100
         return round(antifungal_bnfs_per, 2)
 
     def get_antiviral_per(self):
         total = self.get_total_infection_drugs()
-        #antiviral_bnfs = len(db.session.query(PrescribingData).filter(PrescribingData.BNF_code.startswith("0503%")).all())
-        #antiviral_bnfs_per = (antiviral_bnfs/total)*100
-        #return round(antiviral_bnfs_per, 2)
-        subquery = db.session.query(PrescribingData).filter(
-            PrescribingData.BNF_code.startswith("0503%")).subquery()
-        query = db.session.query(func.sum(subquery.c.quantity)).scalar()
-        antiviral_bnfs_per = (query/total)*100
+        query_antiviral = db.session.query(func.sum(PrescribingData.items)).filter(
+        PrescribingData.BNF_code.startswith("0503%")).scalar()
+        antiviral_bnfs_per = (query_antiviral/total)*100
         return round(antiviral_bnfs_per, 2)
 
     def get_antiproto_per(self):
         total = self.get_total_infection_drugs()
-        #antiproto_bnfs = len(db.session.query(PrescribingData).filter(PrescribingData.BNF_code.startswith("0504%")).all())
-        #antiproto_bnfs_per = (antiproto_bnfs/total)*100
-        #return round(antiproto_bnfs_per, 2)
-        subquery = db.session.query(PrescribingData).filter(
-            PrescribingData.BNF_code.startswith("0504%")).subquery()
-        query = db.session.query(func.sum(subquery.c.quantity)).scalar()
-        antiproto_bnfs_per = (query/total)*100
+        query_antiproto = db.session.query(func.sum(PrescribingData.items)).filter(
+        PrescribingData.BNF_code.startswith("0504%")).scalar()
+        antiproto_bnfs_per = (query_antiproto/total)*100
         return round(antiproto_bnfs_per, 2)
 
     def get_anthelmintics_per(self):
         total = self.get_total_infection_drugs()
-        #anthelmintics_bnfs = len(db.session.query(PrescribingData).filter(PrescribingData.BNF_code.startswith("0505%")).all())
-        #anthelmintics_bnfs_per = (anthelmintics_bnfs/total)*100
-        #return round(anthelmintics_bnfs_per, 2)
-        subquery = db.session.query(PrescribingData).filter(
-            PrescribingData.BNF_code.startswith("0505%")).subquery()
-        query = db.session.query(func.sum(subquery.c.quantity)).scalar()
-        antihelmintics_bnfs_per = (query/total)*100
+        query_anthelmintics = db.session.query(func.sum(PrescribingData.items)).filter(
+        PrescribingData.BNF_code.startswith("0505%")).scalar()
+        antihelmintics_bnfs_per = (query_anthelmintics/total)*100
         return round(antihelmintics_bnfs_per, 2)
 
     def get_total_inf_drugs_PCT(self):

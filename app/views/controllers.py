@@ -42,7 +42,12 @@ def home():
 
 def generate_data_for_tiles():
     """Generate the data for the four home page titles."""
-    return [db_mod.get_total_number_items(), db_mod.get_avg_ACT_cost(), db_mod.get_max_description(), db_mod.get_max_percent_quantity(), db_mod.get_unique()]
+    return [db_mod.get_total_number_items(), db_mod.get_avg_ACT_cost(),
+            db_mod.get_max_description(), db_mod.get_max_percent_quantity(),
+            db_mod.get_unique(), db_mod.get_total_infection_drugs(),
+            db_mod.get_antiB_per(), db_mod.get_antifungal_per(),
+            db_mod.get_antiviral_per(), db_mod.get_antiproto_per(),
+            db_mod.get_anthelmintics_per()]
 
 def generate_barchart_data():
     """Generate the data needed to populate the barchart."""
