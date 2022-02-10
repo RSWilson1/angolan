@@ -53,3 +53,17 @@ def generate_barchart_data():
     data_values = [r[0] for r in data_values]
     pct_codes = [r[0] for r in pct_codes]
     return [data_values, pct_codes]
+
+def generate_progressbar_data():
+    """Generate the data needed to populate the peogressbar"""
+    bact = db_mod.get_ratiobact()
+    fung = 
+    vir =
+    prot =
+    elm =
+    
+    #convert into lists and return
+    #data_values = [r[0] for r in data_values]    
+    return[data_values]
+
+
