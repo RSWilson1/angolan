@@ -66,11 +66,17 @@ class Database:
             PrescribingData.BNF_code.distinct()).label('sum_qty')).scalar())
 
     def get_total_infection_drugs(self):
+        """Generate the total number of items prescribed for infections.
+        This uses the bnf code starting with 05 for infections.
+        """
         total = db.session.query(func.sum(PrescribingData.items)).filter(
             PrescribingData.BNF_code.startswith("05%")).scalar()
         return total
 
     def get_antiB_per(self):
+        """Generate the % Antibiotics prescribed of all infections treatments.
+        This uses the bnf code starting with 0501 for infections.
+        """
         total = self.get_total_infection_drugs()
         query_antibio = db.session.query(func.sum(PrescribingData.items)).filter(
             PrescribingData.BNF_code.startswith("0501%")).scalar()
@@ -78,6 +84,9 @@ class Database:
         return round(antibio_bnfs_per, 2)
 
     def get_antifungal_per(self):
+        """Generate the % antifungal prescribed of all infections treatments.
+        This uses the bnf code starting with 0502 for infections.
+        """
         total = self.get_total_infection_drugs()
         query_antifungal = db.session.query(func.sum(PrescribingData.items)).filter(
             PrescribingData.BNF_code.startswith("0502%")).scalar()
@@ -85,6 +94,9 @@ class Database:
         return round(antifungal_bnfs_per, 2)
 
     def get_antiviral_per(self):
+        """Generate the % antiviral prescribed of all infections treatments.
+        This uses the bnf code starting with 0503 for infections.
+        """
         total = self.get_total_infection_drugs()
         query_antiviral = db.session.query(func.sum(PrescribingData.items)).filter(
         PrescribingData.BNF_code.startswith("0503%")).scalar()
@@ -92,6 +104,9 @@ class Database:
         return round(antiviral_bnfs_per, 2)
 
     def get_antiproto_per(self):
+        """Generate the % antiprotozoals prescribed of all infections treatments.
+        This uses the bnf code starting with 0504 for infections.
+        """
         total = self.get_total_infection_drugs()
         query_antiproto = db.session.query(func.sum(PrescribingData.items)).filter(
         PrescribingData.BNF_code.startswith("0504%")).scalar()
@@ -99,6 +114,9 @@ class Database:
         return round(antiproto_bnfs_per, 2)
 
     def get_anthelmintics_per(self):
+        """Generate the % anthelmintics prescribed of all infections treatments.
+        This uses the bnf code starting with 0505 for infections.
+        """
         total = self.get_total_infection_drugs()
         query_anthelmintics = db.session.query(func.sum(PrescribingData.items)).filter(
         PrescribingData.BNF_code.startswith("0505%")).scalar()
