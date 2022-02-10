@@ -26,7 +26,8 @@ class Database:
 
     def get_prescribed_items_per_pct(self):
         """Return the total items per PCT."""
-        return db.session.query(func.sum(PrescribingData.items).label('item_sum')).group_by(PrescribingData.PCT).all()
+        return db.session.query(func.sum(PrescribingData.items).label(
+            'item_sum')).group_by(PrescribingData.PCT).all()
 
 
     def get_distinct_pcts(self):
@@ -127,3 +128,25 @@ class Database:
         return db.session.query(PrescribingData).filter(
             PrescribingData.BNF_code.startswith("05%")).all().group_by(
                                                 PrescribingData.PCT).all()
+
+    def get_bnf_data_for_PCT(self, pct):
+        """Return all the data for a given PCT for infection drugs % rounded to 2dp."""
+        total = db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.PCT == pct, PrescribingData.BNF_code.startswith("05%")).scalar()
+        query_antibiotics = (db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.PCT == pct, PrescribingData.BNF_code.startswith("0501%")).scalar()/total)*100
+        query_antifungal = (db.session.query(func.sum(PrescribingData.items)).
+                            filter(PrescribingData.PCT == pct,
+                                   PrescribingData.BNF_code.startswith("0502%")).scalar()/total)*100
+        query_antiviral = (db.session.query(func.sum(PrescribingData.items)).
+                           filter(PrescribingData.PCT == pct,
+                                  PrescribingData.BNF_code.startswith("0503%")).scalar()/total)*100
+        query_antiproto = (db.session.query(func.sum(PrescribingData.items)).
+                           filter(PrescribingData.PCT == pct,
+                                  PrescribingData.BNF_code.startswith("0504%")).scalar()/total)*100
+        query_anthelmintics = (db.session.query(func.sum(PrescribingData.items)).
+                               filter(PrescribingData.PCT == pct,
+                                      PrescribingData.BNF_code.startswith("0505%")).scalar()/total)*100
+        return[round(query_antibiotics, 2), round(query_antifungal, 2),
+               round(query_antiviral, 2), round(query_antiproto, 2),
+               round(query_anthelmintics, 2)]

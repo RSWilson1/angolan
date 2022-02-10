@@ -27,6 +27,13 @@
   <script src="{{ url_for('static', filename='js/barchart.js') }}"></script>
   <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
 
+  <!-- Add tooltip to page-->
+  <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
   <!-- Page script -->
   <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
@@ -45,7 +52,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar" style=background:#f5426c>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
@@ -247,9 +254,10 @@
                 <br><br>
                 <div class="card-body">
                   <h6 class="m-0 font-weight-bold text-primary">&nbsp;&nbsp;&nbsp;Antibiotics {{tile_data[6]}}%</h6>
+                  <!-- This displays the % drugs data as progress bar, repeated by drug group -->
                   <div class="col">
                     <div class="progress progress-sm mr-2">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{tile_data[6]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-striped progress-bar-animated" data-toggle="tooltip" title="{{tile_data[6]}}%" role="progressbar" style="width: {{tile_data[6]}}%" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -257,7 +265,7 @@
                   <div class="col">
                     <h6 class="m-0 font-weight-bold text-primary">Antifungals {{tile_data[7]}}%</h6>
                     <div class="progress progress-sm mr-2">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{tile_data[7]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" data-toggle="tooltip" title="{{tile_data[7]}}%" role="progressbar" style="width: {{tile_data[7]}}%" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -265,7 +273,7 @@
                   <div class="col">
                     <h6 class="m-0 font-weight-bold text-primary">Antivirals {{tile_data[8]}}%</h6>
                     <div class="progress progress-sm mr-2">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{tile_data[8]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" data-toggle="tooltip" title="{{tile_data[8]}}%" role="progressbar" style="width: {{tile_data[8]}}%" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -273,7 +281,7 @@
                   <div class="col">
                     <h6 class="m-0 font-weight-bold text-primary">Antiprotozoals {{tile_data[9]}}%</h6>
                     <div class="progress progress-sm mr-2">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{tile_data[9]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" data-toggle="tooltip" title="{{tile_data[9]}}%" role="progressbar" style="width: {{tile_data[9]}}%" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -281,7 +289,7 @@
                   <div class="col">
                     <h6 class="m-0 font-weight-bold text-primary">Anthelmintics {{tile_data[10]}}%</h6>
                     <div class="progress progress-sm mr-2">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{tile_data[10]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" data-toggle="tooltip" title="{{tile_data[10]}}%" role="progressbar" style="width: {{tile_data[10]}}%" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -327,6 +335,71 @@
               </div>
             </div>
           </div>
+          <!-- Infection Drug Percentages by PCT -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Infection Drug Percentages by PCT</h6>
+            </div>
+            <!-- This generates the box to select PCT -->
+            <div class="card-body">
+                <form method='POST' action="{{ url_for('dashboard.home') }}">
+                  <select class="custom-select" id="input-group-select_2" name="pct-option">
+                    {% for item in pct_list %}
+                    <option name="option-list" value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                  </select>
+                  <br><br>
+                  <input type="submit" value="Update" class="btn btn-outline-secondary" />
+                </form>
+                <br>
+                <!-- This displays the % drugs data as progress bars for each drug group. -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Infection treatment drug as % of all infection treatments</h6>
+                  </div>
+                  <br><br>
+                  <div class="card-body">
+                    <h6 class="m-0 font-weight-bold text-primary">&nbsp;&nbsp;&nbsp;Antibiotics {{pct_bnf_data[0]}}%</h6>
+                    <div class="col">
+                      <div class="progress progress-sm mr-2">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" data-toggle="tooltip" title="{{pct_bnf_data[0]}}%" role="progressbar" style="width: {{tile_data[6]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      <!-- To add unique colours to bar add style = "width: {{tile_data[6]}}%;background:#f5426c" and remove any bg tag. This removes animation -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="col">
+                      <h6 class="m-0 font-weight-bold text-primary">Antifungals {{pct_bnf_data[1]}}%</h6>
+                      <div class="progress progress-sm mr-2">
+                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" data-toggle="tooltip" title="{{pct_bnf_data[1]}}%" role="progressbar" style="width: {{tile_data[7]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="col">
+                      <h6 class="m-0 font-weight-bold text-primary">Antivirals {{pct_bnf_data[2]}}%</h6>
+                      <div class="progress progress-sm mr-2">
+                        <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" data-toggle="tooltip" title="{{pct_bnf_data[2]}}%" role="progressbar" style="width: {{tile_data[8]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="col">
+                      <h6 class="m-0 font-weight-bold text-primary">Antiprotozoals {{pct_bnf_data[3]}}%</h6>
+                      <div class="progress progress-sm mr-2">
+                        <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" data-toggle="tooltip" title="{{pct_bnf_data[3]}}%" role="progressbar" style="width: {{tile_data[9]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="col">
+                      <h6 class="m-0 font-weight-bold text-primary">Anthelmintics {{pct_bnf_data[4]}}%</h6>
+                      <div class="progress progress-sm mr-2">
+                        <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" data-toggle="tooltip" title="{{pct_bnf_data[4]}}%" role="progressbar" style="width: {{tile_data[10]}}%" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
           <!-- Creatinine clearance calculator -->
           <div id="creat-calc">
