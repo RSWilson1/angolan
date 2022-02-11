@@ -245,5 +245,5 @@ Project Link: [https://github.com/RSWilson1/angolan](https://github.com/RSWilson
 [product-screenshot_home]: images/home_page.png
 [product-screenshot_tile_inf_drugs_PCT]: images/Inf_drugs_by_pct.png
 [product-screenshot_tile_inf_drugs]: images/Inf_drugs_percent.png
-[product-screenshot_calc]: images/calc.png
+[product-screenshot_calc]: images/Calc.png
 
