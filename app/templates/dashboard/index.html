@@ -52,7 +52,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar" style=background:#f5426c>
+    <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
@@ -340,6 +340,13 @@
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Infection Drug Percentages by PCT</h6>
             </div>
+            <br>
+            <div class="card-header py-3">
+              <div class="text-s font-weight-bold text-dark mb-1"> Select your PCT in drop down list</div>
+              <a href="https://openprescribing.net/ccg/"> Find PCT here (https://openprescribing.net/ccg)</a>
+              <div class="text-s font-weight-bold text-dark mb-1"> Once select click update to show % drug groups prescribed out of all infection treatments.</div>
+            </div>
+            <br>
             <!-- This generates the box to select PCT -->
             <div class="card-body">
                 <form method='POST' action="{{ url_for('dashboard.home') }}">
