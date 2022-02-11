@@ -44,19 +44,20 @@
     and the
 -->
   <script>
-      //function clears the creatinine calculator input fields when onclick = close
+      //function clears the creatinine calculator input fields when onclick = close and when onclick = clear
         function clearFields() {
             var rbSex = document.getElementsByName("sex");
             var patientsAge = document.getElementById("patients-age");
             var patientsWeight = document.getElementById("patients-weight");
             var patientsCreat = document.getElementById("patients-serum");
             var spResults = document.getElementById("spResults");
-            rbSex.value = document.getElementsByName("sex").checked = false;
             patientsAge.value = "";
             patientsWeight.value = "";
             patientsCreat.value = "";
             spResults.innerHTML = "";
             spResults.style.visibility = "hidden";
+            for(var i=0;i<rbSex.length;i++)
+                rbSex[i].checked = false;
             }
 
         //Function calculate the creatinine clearance with the inputted values
@@ -67,18 +68,20 @@
             var patientsCreat = document.getElementById("patients-serum");
             var spResults = document.getElementById("spResults");
             var Sex, weight, result;
+            Sex = "";
             spResults.style.visibility = "visible";
 
             //assigns a numeric value depending on the sex input
-            for (var x = 0; x < rbSex.length; x++) {
+            for (let x = 0; x < rbSex.length; x++) {
                     if (rbSex[x].checked) {
                         Sex = rbSex[x].value;
                         break;
                     }
-                }
+            }
 
             //Error messages to be returned if the values input are not supported.
-            //Age, weight and serum creatinine have a min and max value of 1 and 20 respectively
+            //Age and weight have a min and max value of 1 and 120 respectively
+            //Serum creatinine has a max and min value of 1 and 140 respectively -
             //For patients who are obese adjustments have to be made to the equation which is not yet supported in this
             //calculator. This needs to factor in BMI which is currently not the case in this calculator.
             if ((patientsAge.value)>120) {
@@ -105,9 +108,6 @@
                 weight = parseInt(patientsWeight.value);
                 result = ((((140 - parseInt(patientsAge.value)) * weight) / (72 * parseInt(patientsCreat.value))) * (Sex == "f" ? 0.85 : 1) * 100).toFixed(2);
                 spResults.innerHTML = result + " mL/min is your estimated creatinine clearance.";
-                console.log(rbSex.elements);
-                console.log(result + " mL/min is your estimated creatinine clearance.");
-                console.log(spResults)
                 }
             }
         }
@@ -386,7 +386,7 @@
                     <span id="spAgeErr"></span>
                     <br /><br />
                     <p>Weight of patient (kg):</p>
-                    <input type="number" min="1" max="120" id="patients-weight" />
+                    <input type="number" min="1" max="140" id="patients-weight" />
                     <span id="spWeightErr"></span>
                     <br /><br />
                     <p>Serum creatinine (micromol/L):</p>
@@ -397,17 +397,24 @@
                   <br />
                   <hr />
                   <button type="button" class="btn btn-primary" onclick="performCalc();">Calculate</button>
+                  <button type="button" class="btn btn-secondary" onclick="clearFields();">Clear</button>
                   <button type="button" class="btn btn-danger" onclick="popup.hideCeatCalcFormPopup(); clearFields();">Close</button>
                   <br><br>
                   <span> Result: </span><span id="spResults"></span>
                   <br><br>
                     <span>Calculation information: This formula is applicable only if the serum creatinine is stable. Est. Creatinine Clearance = [[140 - age(yr)]*weight(kg)]/[72*serum Cr(mg/dL)] (multiply by 0.85 for women).</span>
                     <br><br>
-                    <span>Normal Results</span>
+                    <span>The range for a normal test result depends on your age and gender.</span>
+                    <span>For adults younger than 40, normal levels range from:</span>
+                    <br><br>
+                    <span>Males: 97 to 139 mL/min</span>
                     <br>
-                    <span>Males: 97 to 137 mL/min</span>
+                    <span>Females: 87 to 107 mL/min</span>
+                    <br><br>
+                    <span>Creatinine clearance rates go down as you age.</span>
+                    <span> For every decade after age 40, a normal test result is 6.5 mL/min less than the numbers above.</span>
                     <br>
-                    <span>Females: 88 to 128 mL/min</span>
+                    <span>For newborns, the normal range is 40 to 65 mL/min.</span>
                   <hr>
                   </div>
                   <div class="card-header py-3">
