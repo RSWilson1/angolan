@@ -42,7 +42,11 @@ def home():
 
 def generate_data_for_tiles():
     """Generate the data for the four home page titles."""
-    return [db_mod.get_total_number_items(), db_mod.get_avg_ACT_cost(), db_mod.get_max_description(), db_mod.get_max_percent_quantity(), db_mod.get_unique(), db_mod.get_infective_drugs()]
+    return [db_mod.get_total_number_items(), db_mod.get_avg_ACT_cost(), 
+            db_mod.get_max_description(), db_mod.get_max_percent_quantity(), 
+            db_mod.get_unique(), db_mod.get_infective_drugs(),
+            db_mod.get_ratiobact(), db_mod.get_ratiofung(),
+            db_mod.get_ratiovir(), db_mod.get_ratioprot(), db_mod.get_ratioelm()]
 
 def generate_barchart_data():
     """Generate the data needed to populate the barchart."""
@@ -54,17 +58,17 @@ def generate_barchart_data():
     pct_codes = [r[0] for r in pct_codes]
     return [data_values, pct_codes]
 
-def generate_progressbar_data():
-    """Generate the data needed to populate the peogressbar"""
-    # bact = db_mod.get_ratiobact()
-    # fung = db_mod.get_ratiofung()
-    # vir = db_mod.get_ratiovir()
-    # prot = db_mod.get_ratioprot()
-    # elm = db_mod.get_ratioelm()    
-    # data_values = [bact, fung, vir, prot, elm] 
-    data_values= db_mod.get_infective_drugs()   
-    #convert into lists and return
-    #data_values = [r[0] for r in data_values]    
-    return data_values
+# def generate_progressbar_data():
+#     """Generate the data needed to populate the peogressbar"""
+#     # bact = db_mod.get_ratiobact()
+#     # fung = db_mod.get_ratiofung()
+#     # vir = db_mod.get_ratiovir()
+#     # prot = db_mod.get_ratioprot()
+#     # elm = db_mod.get_ratioelm()    
+#     # data_values = [bact, fung, vir, prot, elm] 
+#     data_values= db_mod.get_infective_drugs()   
+#     #convert into lists and return
+#     #data_values = [r[0] for r in data_values]    
+#     return data_values
 
 
