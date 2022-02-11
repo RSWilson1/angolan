@@ -139,10 +139,13 @@ Features:
 General overview of dataset:
 Average actual cost, number of unique items (drugs), total items, top prescribed item.
 
-Tile for % of drugs groups of all infection treatments prescribed and this can be filtered by PCT for unique figures.
+Tile for % of drugs groups of all infection treatments prescribed and this can be filtered by PCT for unique figures:
 
 [![Angolan Dashboard][product-screenshot_tile_inf_drugs]](http://127.0.0.1:5000/dashboard/home/)
 [![Angolan Dashboard][product-screenshot_tile_inf_drugs_PCT]](http://127.0.0.1:5000/dashboard/home/)
+
+Calculator for calculating Creatinin Clearance:
+[![Angolan Dashboard][product-screenshot_calc]](http://127.0.0.1:5000/dashboard/home/)
 
 
 
@@ -242,4 +245,5 @@ Project Link: [https://github.com/RSWilson1/angolan](https://github.com/RSWilson
 [product-screenshot_home]: images/home_page.png
 [product-screenshot_tile_inf_drugs_PCT]: images/Inf_drugs_by_pct.png
 [product-screenshot_tile_inf_drugs]: images/Inf_drugs_percent.png
+[product-screenshot_calc]: images/calc.png
 
