@@ -82,7 +82,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Angolan Dashboard][product-screenshot]](http://127.0.0.1:5000/dashboard/home/)
+[![Angolan Dashboard][product-screenshot_home]](http://127.0.0.1:5000/dashboard/home/)
 
 This is an interactive dashboard to visualise and search the Open Prescribing Dataset.
 
@@ -135,7 +135,16 @@ Python3 and Anaconda should be installed before proceeding.
 
 Our dashboard contains a subset of the open prescribing dataset with tiles which show the total items in the dataset, average actual cost for the NHS, the highest quantity drug at one PCT and the number of unique drugs.
 
-[![Angolan Dashboard][product-screenshot]](http://127.0.0.1:5000/dashboard/home/)
+Features:
+General overview of dataset:
+Average actual cost, number of unique items (drugs), total items, top prescribed item.
+
+Tile for % of drugs groups of all infection treatments prescribed and this can be filtered by PCT for unique figures.
+
+[![Angolan Dashboard][product-screenshot_tile_inf_drugs]](http://127.0.0.1:5000/dashboard/home/)
+[![Angolan Dashboard][product-screenshot_tile_inf_drugs_PCT]](http://127.0.0.1:5000/dashboard/home/)
+
+
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -149,8 +158,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Highest quantity item in dataset and % with progress bar
 - [x] Average actual drug cost to the NHS
 - [x] About section
-- [ ] Calculator for creatine metabolism
-- [ ] Infection treatment drug as % of all infection treatments
+- [x] Calculator for creatine metabolism
+- [x] Infection treatment drug as % of all infection treatments
+- [x] Infection treatment drug as % of all infection treatments by PCT
+- [ ] Add documention - start-up guide with known problems and other useful information for the dataset
+- [ ] Adding further improvements for accessibility.
 
 See the [open issues](https://github.com/RSWilson1/angolan/issues) for a full list of proposed features (and known issues).
 
@@ -227,4 +239,7 @@ Project Link: [https://github.com/RSWilson1/angolan](https://github.com/RSWilson
 [license-url]: https://github.com/RSWilson1/angolan/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/Screenshot.png
+[product-screenshot_home]: images/home_page.png
+[product-screenshot_tile_inf_drugs_PCT]: images/Inf_drugs_by_pct.png
+[product-screenshot_tile_inf_drugs]: images/Inf_drugs_percent.png
+
