@@ -67,16 +67,18 @@
             var patientsWeight = document.getElementById("patients-weight");
             var patientsCreat = document.getElementById("patients-serum");
             var spResults = document.getElementById("spResults");
-            var Sex, weight, result;
-            Sex = "";
+            var weight, result;
+            var Sex = null;
             spResults.style.visibility = "visible";
 
             //assigns a numeric value depending on the sex input
             for (let x = 0; x < rbSex.length; x++) {
                     if (rbSex[x].checked) {
                         Sex = rbSex[x].value;
-                        break;
                     }
+            } if (Sex == null) {
+                         spResults.innerHTML = "* Please enter the patient's sex.";
+                        return;
             }
 
             //Error messages to be returned if the values input are not supported.
