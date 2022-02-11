@@ -66,52 +66,80 @@ class Database:
         return int(db.session.query(func.count(PrescribingData.BNF_code.distinct()).label('sum_qty')).first()[0])
         # return db.session.query(func.count(distinct(PrescribingData.BNF_code)).label("sum distinct").first()[0])
 
-    def get_infective_drugs(self):
-        """Calculate the absolute number of the prescribed anti-infective drugs; calculate the absolute 
-        number of the precsibed antibacteria, antifungine, antivirus, antiprotozoa and antielminthic drugs;
-        return ratios of each group over total anti-infective drugs"""
-        total_infective= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^05'))))
-        antibacterial= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0501'))))
-        antifungal= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0502'))))
-        antiviral= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0503'))))
-        antiprotozoa= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0504'))))
-        antielmintics= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0505'))))
-        ratiobact= antibacterial/total_infective
-        ratiofung= antifungal/total_infective
-        ratiovir= antiviral/total_infective
-        ratiopro= antiprotozoa/total_infective
-        ratioelm= antielmintics/total_infective
-        return[ratiobact, ratiofung, ratiovir, ratiopro, ratioelm]
-
     # def get_infective_drugs(self):
-    #     global total_infective
-    #     total_infective= int(db.session.query(func.sum(PrescribingData.filter(PrescribingData.BNF_code.regexp('^05')))).first()[0])
-    #     return(total_infective)
-
-    # def get_ratiobact(self):
-    #     antibacterial= int(db.session.query(func.sum(PrescribingData.filter(PrescribingData.BNF_code.regexp('^0501')))).first()[0])
+    #     """Calculate the absolute number of the prescribed anti-infective drugs; calculate the absolute 
+    #     number of the precsibed antibacteria, antifungine, antivirus, antiprotozoa and antielminthic drugs;
+    #     return ratios of each group over total anti-infective drugs"""
+    #     total_infective= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^05'))))
+    #     antibacterial= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0501'))))
+    #     antifungal= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0502'))))
+    #     antiviral= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0503'))))
+    #     antiprotozoa= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0504'))))
+    #     antielmintics= int(db.session.query(func.sum(PrescribingData.items).filter(PrescribingData.BNF_code.startswith('^0505'))))
     #     ratiobact= antibacterial/total_infective
-    #     return(ratiobact)
-
-    # def get_ratiofung(self):
-    #     antifungal= int(db.session.query(func.sum(PrescribingData.filter(PrescribingData.BNF_code.regexp('^0502')))).first()[0])
     #     ratiofung= antifungal/total_infective
-    #     return(ratiofung)
-
-    # def get_ratiovir(self):
-    #     antiviral= int(db.session.query(func.sum(PrescribingData.filter(PrescribingData.BNF_code.regexp('^0503')))).first()[0]) 
     #     ratiovir= antiviral/total_infective
-    #     return(ratiovir)
-
-    # def get_ratioprot(self):
-    #     antiprotozoa= int(db.session.query(func.sum(PrescribingData.filter(PrescribingData.BNF_code.regexp('^0504')))).first()[0])
-    #     ratioprot= antiprotozoa/total_infective
-    #     return(ratioprot)
-
-    # def get_ratioelm(self):
-    #     antielmintics= int(db.session.query(func.sum(PrescribingData.filter(PrescribingData.BNF_code.regexp('^0505')))).first()[0])
+    #     ratiopro= antiprotozoa/total_infective
     #     ratioelm= antielmintics/total_infective
-    #     return(ratioelm)
+    #     return[ratiobact, ratiofung, ratiovir, ratiopro, ratioelm]
+
+    def get_infective_drugs(self):
+        """Generate the total number of items prescribed for infections.
+        This uses the bnf code starting with 05 for infections.
+        """
+        total = db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.BNF_code.startswith("05%")).scalar()
+        return total
+
+    def get_ratiobact(self):
+        """Generate the % Antibiotics prescribed of all infections treatments.
+        This uses the bnf code starting with 0501 for infections.
+        """
+        total = self.get_infective_drugs()
+        query_antibio = db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.BNF_code.startswith("0501%")).scalar()
+        antibio_bnfs_per = (query_antibio/total)*100
+        return round(antibio_bnfs_per, 2)
+
+    def get_ratiofung(self):
+        """Generate the % antifungal prescribed of all infections treatments.
+        This uses the bnf code starting with 0502 for infections.
+        """
+        total = self.get_infective_drugs()
+        query_antifungal = db.session.query(func.sum(PrescribingData.items)).filter(
+            PrescribingData.BNF_code.startswith("0502%")).scalar()
+        antifungal_bnfs_per = (query_antifungal/total)*100
+        return round(antifungal_bnfs_per, 2)
+
+    def get_ratiovir(self):
+        """Generate the % antiviral prescribed of all infections treatments.
+        This uses the bnf code starting with 0503 for infections.
+        """
+        total = self.get_infective_drugs()
+        query_antiviral = db.session.query(func.sum(PrescribingData.items)).filter(
+        PrescribingData.BNF_code.startswith("0503%")).scalar()
+        antiviral_bnfs_per = (query_antiviral/total)*100
+        return round(antiviral_bnfs_per, 2)
+
+    def get_ratioprot(self):
+        """Generate the % antiprotozoals prescribed of all infections treatments.
+        This uses the bnf code starting with 0504 for infections.
+        """
+        total = self.get_infective_drugs()
+        query_antiproto = db.session.query(func.sum(PrescribingData.items)).filter(
+        PrescribingData.BNF_code.startswith("0504%")).scalar()
+        antiproto_bnfs_per = (query_antiproto/total)*100
+        return round(antiproto_bnfs_per, 2)
+
+    def get_ratioelm(self):
+        """Generate the % anthelmintics prescribed of all infections treatments.
+        This uses the bnf code starting with 0505 for infections.
+        """
+        total = self.get_infective_drugs()
+        query_anthelmintics = db.session.query(func.sum(PrescribingData.items)).filter(
+        PrescribingData.BNF_code.startswith("0505%")).scalar()
+        antihelmintics_bnfs_per = (query_anthelmintics/total)*100
+        return round(antihelmintics_bnfs_per, 2)
 
 
 
