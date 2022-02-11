@@ -1,9 +1,8 @@
 
 """
 NAME:          test_database.py
-AUTHOR:        Alan Davies (Lecturer Health Data Science)
-EMAIL:         alan.davies-2@manchester.ac.uk
-DATE:          24/12/2019
+AUTHOR:        Rob Wilson
+DATE:          09/02/2022
 INSTITUTION:   University of Manchester (FBMH)
 DESCRIPTION:   Suite of tests for testing the dashboards database
                functionality.
