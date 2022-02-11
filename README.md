@@ -162,6 +162,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Infection treatment drug as % of all infection treatments
 - [x] Infection treatment drug as % of all infection treatments by PCT
 - [ ] Add documention - start-up guide with known problems and other useful information for the dataset
+- [ ] Adding further improvements for accessibility.
 
 See the [open issues](https://github.com/RSWilson1/angolan/issues) for a full list of proposed features (and known issues).
 
